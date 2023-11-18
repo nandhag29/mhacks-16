@@ -3,6 +3,12 @@ import Header from "../components/header";
 import { useSession } from "next-auth/react";
 import Picture from '../components/Picture';
 
+import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
+import axios from 'axios';
+
+const prisma = new PrismaClient();
+
 // TODO
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
@@ -34,6 +40,15 @@ function generateGuessCorrect(input: string): string {
     return input.replace(/[^a-zA-Z]/g, '').toLowerCase();
 }
 
+async function updatePoints(email: string, correct: boolean) {
+    if (correct) {
+        const res = await axios.put('/api/updatePoints', { email });
+        if (res.status !== 200) {
+            console.error('Failed to update points');
+        }
+    }
+}
+
 export default function Play() {
     const [image, setImage] = useState<string | null>(null);
     const [text, setText] = useState<string>("");
@@ -53,15 +68,28 @@ export default function Play() {
         setCorrect(false);
     }
 
-    function submitGuess() {
+    async function submitGuess() {
+        
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
             setFeedback("correct! +1");
             setImage(generateRandom);
             setText("");
             setCorrect(false);
+            if (session){
+                await updatePoints(session.user.email, true);
+            }
         } else {
             setFeedback("wrong, try again!");
         }
+
+        //if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
+        //    setFeedback("correct! +1");
+        //    setImage(generateRandom);
+        //    setText("");
+        //    setCorrect(false);
+        //} else {
+        //    setFeedback("wrong, try again!");
+        //}
     }
 
     return (
@@ -94,4 +122,5 @@ export default function Play() {
         </div>
         </main>
     )
+
 }
