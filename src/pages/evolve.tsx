@@ -16,7 +16,7 @@ function which_evo(point: number): string {
 }
 
 export default function evolv(){
-    
+    return <img src={which_evo(3)}></img>
 }
 
 
