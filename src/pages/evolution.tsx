@@ -33,7 +33,7 @@ export default function Profile() {
                 <>
                     <p>{ profileData.points }</p>
                     <p>{ profileData.streak }</p>
-                    <p>{ profileData.evolution }</p>
+                    <img src={profileData.evolution} />
                 </>
             }
 
