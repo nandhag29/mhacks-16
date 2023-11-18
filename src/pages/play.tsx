@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../components/header";
 
 // TODO
 // Maybe remove images after they've been seen
@@ -30,7 +31,7 @@ function generateGuessCorrect(input: string): string {
 export default function Play() {
     const [image, setImage] = useState<string | null>(null);
     const [text, setText] = useState<string>("");
-    const [feedback, setFeedback] = useState<string>("");
+    const [feedback, setFeedback] = useState<string | null>(null);
     const [correct, setCorrect] = useState<boolean>(false);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ export default function Play() {
 
     function generateNew() {
         setImage(generateRandom);
-        setFeedback("");
+        setFeedback(null);
     }
 
     function submitGuess() {
@@ -52,21 +53,30 @@ export default function Play() {
 
     return (
         <main>
-        <h1>Play</h1>
-        { image &&
-            <>
-                <img src={image} />
-                { correct &&
-                    <p>Correct: { generateImageCorrect(image) }</p>
-                }
-            </>
-        }
-        <button onClick={generateNew}>Generate new</button>
-        <button></button>
-        <input type="text" placeholder="enter the word here..." onChange={ (event) => setText(event.target.value) } />
-        <button onClick={ () => setCorrect(!correct) }>Show correct</button>
-        <button onClick={submitGuess}>Guess!</button>
-        <p>{ feedback }</p>
+        <Header />
+        <div className="flex flex-col w-1/2 m-auto">
+            <h1>Play</h1>
+            { image &&
+                <>
+                    <img width="300px" height="300px" src={image} />
+                    { correct ?
+                        <p className="h-2">Correct: { generateImageCorrect(image) }</p>
+                        :
+                        <p className="h-2" />
+                    }
+                </>
+            }
+        
+            <button onClick={ () => setCorrect(!correct) }>Show correct</button>
+            <input type="text" placeholder="enter the word here..." onChange={ (event) => setText(event.target.value) } />
+            <button onClick={submitGuess}>Guess!</button>
+            { feedback ?
+                <p className="h-2">{ feedback }</p>
+                :
+                <p className="h-2" />
+            }
+            <button onClick={generateNew}>Generate new</button>
+        </div>
         </main>
     )
 }
