@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import Header from "../components/header";
 import { useSession } from "next-auth/react";
 import Picture from '../components/Picture';
-import { PrismaClient } from "@prisma/client";
 
 // TODO
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
-// Stretch images to card
 // if an answer is shown, you don't get a point and your streak is lost
-// Auth
 
 const IMAGES = [
     "Goodbye.png",
@@ -103,5 +100,4 @@ export default function Play() {
         </div>
         </main>
     )
-
 }
