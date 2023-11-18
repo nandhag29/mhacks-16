@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/header";
 import { useSession } from "next-auth/react";
+import Picture from '../components/Picture';
 
 // TODO
 // Maybe remove images after they've been seen
@@ -70,7 +71,7 @@ export default function Play() {
             <div className="h-60">
             { image &&
                 <>
-                    <img className="m-auto" width="210px" height="210px" src={image} />
+                    <Picture src={image} />
                     { correct ?
                         <p className="h-2 mb-3">answer: { generateImageCorrect(image) }</p>
                         :
