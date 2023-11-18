@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Header from "../components/header";
+import { useSession } from "next-auth/react";
 
 // TODO
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
 // Stretch images to card
-// TODO if an answer is shown, you don't get a point and your streak is lost
+// if an answer is shown, you don't get a point and your streak is lost
+// Auth
 
 const IMAGES = [
     "Goodbye.png",
@@ -36,6 +38,9 @@ export default function Play() {
     const [text, setText] = useState<string>("");
     const [feedback, setFeedback] = useState<string | null>(null);
     const [correct, setCorrect] = useState<boolean>(false);
+
+    // Authentication
+    const { data: session } = useSession()
 
     useEffect(() => {
         setImage(generateRandom());
