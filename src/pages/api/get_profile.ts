@@ -22,5 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    res.status(200).json({ evolution: user.email });
+    res.status(200).json({
+        points: user.points,
+        streak: user.streak,
+        evolution: user.evolution,
+    });
 }

@@ -4,7 +4,7 @@ import Header from "../components/header";
 
 export default function Profile() {
     const { data: session } = useSession();
-    const [profileData, setProfileData] = useState<string | null>(null);
+    const [profileData, setProfileData] = useState(null);
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -30,7 +30,11 @@ export default function Profile() {
             </div>
 
             { profileData &&
-                <p>{ profileData.evolution }</p>
+                <>
+                    <p>{ profileData.points }</p>
+                    <p>{ profileData.streak }</p>
+                    <p>{ profileData.evolution }</p>
+                </>
             }
 
             <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-60" onClick={() => signOut()}>Sign Out</button>

@@ -80,7 +80,7 @@ export default function Play() {
                 </>
             }
             </div>
-            <button className="text-red-400 mt-5" onClick={ () => setCorrect(!correct) }>Show Answer</button>
+            <button className="text-red-400 mt-10" onClick={ () => setCorrect(!correct) }>Show Answer</button>
             <input className="ml-auto mr-auto w-60 mt-5 mb-5 p-1 outline-dashed rounded" type="text" placeholder="enter the word here..." value={text} onChange={ (event) => setText(event.target.value) } />
             <button className="m-auto mb-4 bg-blue-700 text-white border border-blue-700 font-bold py-2 px-6 rounded-lg w-40" onClick={submitGuess}>Guess!</button>
             { feedback ?
