@@ -31,6 +31,7 @@ export default function Play() {
     const [image, setImage] = useState<string | null>(null);
     const [text, setText] = useState<string>("");
     const [feedback, setFeedback] = useState<string>("");
+    const [correct, setCorrect] = useState<boolean>(false);
 
     useEffect(() => {
         setImage(generateRandom());
@@ -43,7 +44,7 @@ export default function Play() {
 
     function submitGuess() {
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
-            setFeedback("correct!");
+            setFeedback("correct! +1");
         } else {
             setFeedback("Wrong");
         }
@@ -55,11 +56,15 @@ export default function Play() {
         { image &&
             <>
                 <img src={image} />
-                <p>Correct: { generateImageCorrect(image) }</p>
+                { correct &&
+                    <p>Correct: { generateImageCorrect(image) }</p>
+                }
             </>
         }
         <button onClick={generateNew}>Generate new</button>
+        <button></button>
         <input type="text" placeholder="enter the word here..." onChange={ (event) => setText(event.target.value) } />
+        <button onClick={ () => setCorrect(!correct) }>Show correct</button>
         <button onClick={submitGuess}>Guess!</button>
         <p>{ feedback }</p>
         </main>
