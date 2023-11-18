@@ -68,7 +68,7 @@ export default function Play() {
         <main>
         <Header />
         <div className="flex flex-col w-1/2 m-auto text-center">
-            <div className="h-60">
+            <div className="h-60 mt-5">
             { image &&
                 <>
                     <Picture src={image} />
