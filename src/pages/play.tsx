@@ -19,12 +19,15 @@ function generateRandom(): string {
     return IMAGES[Math.floor(Math.random() * 9)]
 }
 
-function generateCorrect(input: string): string {
+function generateImageCorrect(input: string): string {
     return input.substring(0, input.length - 4).replace(/[^a-zA-Z]/g, '').toLowerCase();
 }
 
+function generateGuessCorrect(input: string): string {
+    return input.replace(/[^a-zA-Z]/g, '').toLowerCase();
+}
+
 export default function Play() {
-    // Generate flashcards, text box, wtvr
     const [image, setImage] = useState<string | null>(null);
     const [text, setText] = useState<string>("");
     const [feedback, setFeedback] = useState<string>("");
@@ -33,8 +36,13 @@ export default function Play() {
         setImage(generateRandom());
     }, []);
 
+    function generateNew() {
+        setImage(generateRandom);
+        setFeedback("");
+    }
+
     function submitGuess() {
-        if (generateCorrect(image || "") === generateCorrect(text)) {
+        if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
             setFeedback("correct!");
         } else {
             setFeedback("Wrong");
@@ -47,11 +55,12 @@ export default function Play() {
         { image &&
             <>
                 <img src={image} />
-                <p>Correct: { generateCorrect(image) }</p>
+                <p>Correct: { generateImageCorrect(image) }</p>
             </>
         }
+        <button onClick={generateNew}>Generate new</button>
         <input type="text" placeholder="enter the word here..." onChange={ (event) => setText(event.target.value) } />
-        <button onSubmit={submitGuess}>Guess!</button>
+        <button onClick={submitGuess}>Guess!</button>
         <p>{ feedback }</p>
         </main>
     )
