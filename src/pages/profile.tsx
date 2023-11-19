@@ -19,7 +19,7 @@ export default function Profile() {
         };
 
         fetchProfileData();
-    }, []);
+    }, [session]);
     
     if ( session ) {
         return (

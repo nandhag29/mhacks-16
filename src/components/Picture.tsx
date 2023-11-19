@@ -6,7 +6,7 @@ interface PictureProps {
 const Picture: React.FC<PictureProps> = ({ src }) => {
     return (
         <div className="m-auto w-64 h-64 overflow-hidden">
-        <img src={src} className="w-full h-full object-cover" />
+        <img src={src} className="w-full h-full object-cover rounded-3xl" />
         </div>
     );
 };
