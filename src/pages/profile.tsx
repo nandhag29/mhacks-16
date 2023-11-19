@@ -1,6 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-import Header from "../components/header";
+import Header from "../components/NavBar";
 import ProgressBar from "../components/progressbar";
 
 function getEvolution(points: number) {
