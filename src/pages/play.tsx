@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
 import { useSession, signIn } from "next-auth/react";
 import Leaderboard from "@/components/leaderboard";
 import ProgressBar from "../components/progressbar";
