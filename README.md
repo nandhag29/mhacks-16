@@ -1,5 +1,4 @@
 <img src="public/ASL_EVO_LOGO.png" alt="logo" width="400">
-<img src="public/buuf.png" alt="biff" width="150"/>
 <img src="public/boof.png" alt="biff" width="150"/>
 
 ## Inspiration
