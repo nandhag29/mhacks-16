@@ -3,6 +3,7 @@ import Header from "../components/header";
 import { useSession, signIn } from "next-auth/react";
 import Picture from '../components/Picture';
 import Leaderboard from "@/components/leaderboard";
+import ProgressBar from "../components/progressbar";
 
 // TODO
 // Maybe remove images after they've been seen
@@ -34,6 +35,16 @@ function getEvolution(points: number) {
         return "Buuf.png";
     } else {
         return "Boof.png";
+    }
+}
+
+function progress(points: number) {
+    if (points < 20) {
+        return (points / 20) * 100;
+    } else if (points < 40) {
+        return (points / 40) * 100;
+    } else {
+        return 100;
     }
 }
 
@@ -233,6 +244,9 @@ export default function Play() {
                     <div className="overflow-hidden m-auto">
                         {profileData.points === 20 || (profileData.points === 21 && profileData.streak > 3) ? <img width="400" height="400" src={"BUUFspark.gif"} alt="BUUFspark.gif" /> :
                         profileData.points === 40 || (profileData.points === 41 && profileData.streak > 3) ? <img width="400" height="400" src={"BOOFspark.gif"} alt="BOOFspark.gif" /> : <img width="400" height="400" src={getEvolution(profileData.points)} alt="Evolution.gif" />}
+                    </div>
+                    <div className="overflow-hidden m-auto">
+                        <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={20} />
                     </div>
                 </>
                 :
