@@ -33,8 +33,10 @@ export default function Profile() {
                 { profileData &&
                     <>
                         <p>Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
-                        { profileData.streak > 2 &&
+                        { profileData.streak > 2 ?
                             <p>Your current streak: <span className="font-bold">{ profileData.streak } 🔥</span></p>
+                            :
+                            <p>Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                         }
                         <Picture src={profileData.evolution} />
                     </>
