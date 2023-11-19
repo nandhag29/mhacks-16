@@ -215,11 +215,11 @@ export default function Play() {
             }
             </div>
             <div className="flex flex-col justify-center">
-            <button className="text-red-400 mt-10" onClick={toggleShowAnswer}>Show Answer</button>
             <br />
             <input className="ml-auto mr-auto w-60 mt-5 mb-5 p-1 outline-dashed rounded" type="text" placeholder="enter the word here..." value={text} onChange={ (event) => setText(event.target.value) } />
-            <br />
-            <button className="m-auto mb-4 bg-emerald-700 text-white border border-emerald-700 font-bold py-2 px-6 rounded-lg w-40" onClick={submitGuess}>Submit!</button>
+
+            <button className="m-auto mb-4 bg-emerald-700 text-white border border-emerald-700 font-bold py-2 px-6 rounded-lg w-60" onClick={submitGuess}>Submit!</button>
+            <button className="m-auto mb-4 bg-red-700 text-white border border--700 font-bold py-2 px-6 rounded-lg w-60" onClick={toggleShowAnswer}>Show Answer</button>
             <div className="text-center">
             { feedback ?
                 <p className={"h-2 mb-5 text-xl " + feedbackStyle}>{ feedback }</p>
