@@ -25,7 +25,7 @@ function progress(points: number) {
 
 export default function Profile() {
     const { data: session } = useSession();
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState<any>(null);
 
     let biffStyle = {
         transform: "scale(1.0)",
@@ -45,7 +45,7 @@ export default function Profile() {
         fetchProfileData();
     }, [session]);
     
-    if ( session ) {
+    if ( session && session.user ) {
         return (
             <main>
             <Header />
@@ -53,7 +53,7 @@ export default function Profile() {
                 <h1 className="text-2xl mt-8 mb-8">You are logged in as <span className="font-bold">{session.user.name}</span></h1>
             
 
-                { profileData &&
+                { profileData && "points" in profileData && "streak" in profileData &&
                     <>
                         <p className="text-xl">Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
                         { profileData.streak > 2 ?

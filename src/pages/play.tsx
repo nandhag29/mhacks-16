@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../components/header";
 import { useSession, signIn } from "next-auth/react";
-import Picture from '../components/Picture';
 import Leaderboard from "@/components/leaderboard";
 import ProgressBar from "../components/progressbar";
 
@@ -73,7 +72,7 @@ export default function Play() {
     const [feedback, setFeedback] = useState<string | null>(null);
     const [feedbackStyle, setFeedbackStyle] = useState<string>("");
     const [correct, setCorrect] = useState<boolean>(false);
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState<any>(null);
 
     // Authentication
     const { data: session } = useSession()
@@ -127,15 +126,13 @@ export default function Play() {
     }, [session]);
 
     function submitGuess() {
-        let copy = profileData;
-
         if (!text) return;
 
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
             setFeedbackStyle("text-emerald-400");
             setImageBorder("border-emerald-400");
             setFeedback("correct!");
-            setImage(generateRandom(copy.points));
+            setImage(generateRandom(profileData.points));
             setText("");
             setCorrect(false);
             deceptiveUpdate(true);
