@@ -8,6 +8,7 @@ import Leaderboard from "@/components/leaderboard";
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
 
+
 const IMAGES = [
     "Goodbye.png",
     "Hello.png",
@@ -28,6 +29,7 @@ function getEvolution(points: number) {
     } else {
         return "Boof.png";
     }
+
 }
 
 function generateRandom(): string {
@@ -202,7 +204,8 @@ export default function Play() {
                         <p>Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                     }
                     <div className="overflow-hidden m-auto">
-                        <img width="400" height="400" src={getEvolution(profileData.points)} />
+                        {profileData.points === 20 || (profileData.points === 21 && profileData.streak > 3) ? <img width="400" height="400" src={"BUUFspark.gif"} alt="BUUFspark.gif" /> :
+                        profileData.points === 40 || (profileData.points === 41 && profileData.streak > 3) ? <img width="400" height="400" src={"BOOFspark.gif"} alt="BOOFspark.gif" /> : <img width="400" height="400" src={getEvolution(profileData.points)} alt="Evolution.gif" />}
                     </div>
                 </>
                 :
