@@ -17,6 +17,10 @@ export default function Profile() {
     const { data: session } = useSession();
     const [profileData, setProfileData] = useState(null);
 
+    let biffStyle = {
+        transform: "scale(1.2)",
+    };
+
     useEffect(() => {
         const fetchProfileData = async () => {
             if (!session || !session.user) {
@@ -36,19 +40,20 @@ export default function Profile() {
             <main>
             <Header />
             <div className="flex flex-col text-center">
-                <h1 className="text-4xl mt-8">ASL-EVO Account</h1>
-                <h2 className="text-xl mt-4 mb-8">You are logged in as <span className="font-bold">{session.user.name}</span></h2>
+                <h1 className="text-2xl mt-8 mb-8">You are logged in as <span className="font-bold">{session.user.name}</span></h1>
             
 
                 { profileData &&
                     <>
-                        <p>Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
+                        <p className="text-xl">Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
                         { profileData.streak > 2 ?
-                            <p>Your current streak: <span className="font-bold">{ profileData.streak } 🔥</span></p>
+                            <p className="text-xl">Your current streak: <span className="font-bold">{ profileData.streak } 🔥</span></p>
                             :
-                            <p>Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
+                            <p className="text-xl">Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                         }
-                        <Picture src={getEvolution(profileData.points)} />
+                        <div className="overflow-hidden m-auto">
+                            <img width="400" height="400" style={biffStyle} src={getEvolution(profileData.points)} />
+                        </div>
                     </>
                 }
 
@@ -57,14 +62,24 @@ export default function Profile() {
             </main>
         )
     }
+
+    biffStyle = {
+        transform: "scale(3.0)",
+    };
+
     return (
         <main>
         <Header />
         <div className="flex flex-col text-center">
-            <h1 className="text-4xl mt-8">Welcome to ASL-EVO!</h1>
-            <h2 className="text-2xl mt-8">You are not logged in.</h2>
+            <h2 className="text-2xl mt-10">You are not logged in. You can still play, but your progress won't be tracked.</h2>
 
-            <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-40" onClick={() => signIn()}>Sign In</button>
+            <div className="overflow-hidden w-96 h-96 m-auto">
+                <img style={biffStyle} src="Biff.png" />
+            </div>
+
+            <p>(Biff wants you to make an account)</p>
+
+            <button className="m-auto mt-10 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-40" onClick={() => signIn()}>Sign In</button>
         </div>
         </main>
     );

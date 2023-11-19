@@ -116,9 +116,11 @@ export default function Play() {
                 :
                 <p className="h-2 mb-5" />
             }
+            {/*
             <button className="m-auto bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-40" onClick={generateNew}>
                 Generate New
             </button>
+            */}
         </div>
         </main>
     )
