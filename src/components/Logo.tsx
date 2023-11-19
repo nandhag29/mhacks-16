@@ -2,10 +2,10 @@
 
 function Logo() {
   return(
-    <a href="/">
+    <a href="/" className="ml-2">
         <img
             src="LOGO.png"
-            style={{ width: '35%', height: 'auto', maxWidth: '40%', maxHeight: '100%', objectFit: 'contain' }}
+            style={{ width: '300px', height: 'auto', maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
             alt="Logo"
         />
     </a>
