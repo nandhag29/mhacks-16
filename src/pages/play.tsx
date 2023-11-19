@@ -91,7 +91,9 @@ export default function Play() {
         fetchProfileData().then(profileData => {
             if (profileData) {
                 setImage(generateRandom(profileData.points));
-            } 
+            } else {
+                setImage(generateRandom(1000))
+            }
         });
     }, [session]);
 
@@ -132,7 +134,7 @@ export default function Play() {
             setFeedbackStyle("text-emerald-400");
             setImageBorder("border-emerald-400");
             setFeedback("correct!");
-            setImage(generateRandom(profileData.points));
+            setImage(generateRandom(profileData ? profileData.points : 1000));
             setText("");
             setCorrect(false);
             deceptiveUpdate(true);
