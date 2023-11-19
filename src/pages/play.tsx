@@ -72,7 +72,7 @@ export default function Play() {
     const [feedback, setFeedback] = useState<string | null>(null);
     const [feedbackStyle, setFeedbackStyle] = useState<string>("");
     const [correct, setCorrect] = useState<boolean>(false);
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState<any>(null);
 
     // Authentication
     const { data: session } = useSession()
