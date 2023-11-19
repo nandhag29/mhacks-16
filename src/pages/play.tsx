@@ -44,8 +44,10 @@ function generateGuessCorrect(input: string): string {
 
 export default function Play() {
     const [image, setImage] = useState<string | null>(null);
+    const [imageBorder, setImageBorder] = useState<string>("border-backgroundEmeraldCustom");
     const [text, setText] = useState<string>("");
     const [feedback, setFeedback] = useState<string | null>(null);
+    const [feedbackStyle, setFeedbackStyle] = useState<string>("");
     const [correct, setCorrect] = useState<boolean>(false);
     const [profileData, setProfileData] = useState(null);
 
@@ -63,6 +65,7 @@ export default function Play() {
             let copy = profileData;
             copy.points += copy.streak >= 3 ? 2 : 1;
             copy.streak += 1;
+            copy.evolution = getEvolution(copy.points);
             setProfileData(copy);
         } else {
             let copy = profileData;
@@ -89,6 +92,8 @@ export default function Play() {
         if (!text) return;
 
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
+            setFeedbackStyle("text-emerald-400");
+            setImageBorder("border-emerald-400");
             setFeedback("correct!");
             setImage(generateRandom());
             setText("");
@@ -103,6 +108,8 @@ export default function Play() {
                 });
             }
         } else {
+            setFeedbackStyle("text-red-400");
+            setImageBorder("border-red-400");
             setFeedback("wrong, try again!");
             setText("");
             deceptiveUpdate(false);
@@ -115,10 +122,12 @@ export default function Play() {
                 });
             }
         }
+        feedbackClean();
     }
 
     function toggleShowAnswer() {
         if (!correct && session && session.user) {
+            deceptiveUpdate(false);
             fetch('/api/incorrect', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -127,6 +136,15 @@ export default function Play() {
             });
         }
         setCorrect(!correct);
+    }
+
+    function feedbackClean() {
+        const timeoutId = setTimeout(() => {
+            setFeedback(null);
+            setImageBorder("border-backgroundEmeraldCustom");
+        }, 3000);
+    
+        return () => clearTimeout(timeoutId);
     }
 
     return (
@@ -143,7 +161,12 @@ export default function Play() {
             <div className="h-60 mt-5">
             { image &&
                 <>
-                    <Picture src={image} />
+                    {/*<Picture src={image} /> */}
+
+                    <div className="m-auto w-64 h-64 overflow-hidden">
+                        <img src={image} className={"w-full h-full object-cover rounded-3xl border-4 " + imageBorder} />
+                    </div>
+
                     <div className="text-center">
                     { correct ?
                         <p className="h-2 mb-3">answer: { generateImageCorrect(image) }</p>
@@ -159,12 +182,12 @@ export default function Play() {
             <br />
             <input className="ml-auto mr-auto w-60 mt-5 mb-5 p-1 outline-dashed rounded" type="text" placeholder="enter the word here..." value={text} onChange={ (event) => setText(event.target.value) } />
             <br />
-            <button className="m-auto mb-4 bg-emerald-700 text-white border border-emerald-700 font-bold py-2 px-6 rounded-lg w-40" onClick={submitGuess}>Guess!</button>
+            <button className="m-auto mb-4 bg-emerald-700 text-white border border-emerald-700 font-bold py-2 px-6 rounded-lg w-40" onClick={submitGuess}>Submit!</button>
             <div className="text-center">
             { feedback ?
-                <p className="h-2 mb-5">{ feedback }</p>
+                <p className={"h-2 mb-5 text-xl " + feedbackStyle}>{ feedback }</p>
                 :
-                <p className="h-2 mb-5" />
+                <p className="h-2 mb-5 texl-xl" />
             }
             </div>
             </div>
