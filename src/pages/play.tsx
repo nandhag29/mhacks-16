@@ -246,7 +246,8 @@ export default function Play() {
                         profileData.points === 40 || (profileData.points === 41 && profileData.streak > 3) ? <img width="400" height="400" src={"BOOFspark.gif"} alt="BOOFspark.gif" /> : <img width="400" height="400" src={getEvolution(profileData.points)} alt="Evolution.gif" />}
                     </div>
                     <div className="overflow-hidden m-auto">
-                        <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={20} />
+                        <div style={{justifyContent: 'center' }}>Progress towards next evolution:</div>
+                        <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={37} />
                     </div>
                 </>
                 :

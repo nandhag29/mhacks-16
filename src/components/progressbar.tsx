@@ -27,7 +27,6 @@ const ProgressBar = (props) => {
   
     return (
       <div>
-        <div style={{justifyContent: 'center' }}>Progress towards next evolution</div>
         <div style={containerStyles}>
           <div style={fillerStyles}>
             <span style={labelStyles}>{`${completed}%`}</span>
