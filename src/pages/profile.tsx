@@ -1,6 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-import Picture from "../components/Picture";
 import Header from "../components/header";
 
 function getEvolution(points: number) {
