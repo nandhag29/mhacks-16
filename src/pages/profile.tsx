@@ -1,5 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Picture from "../components/Picture";
 import Header from "../components/header";
 
 export default function Profile() {
@@ -18,26 +19,29 @@ export default function Profile() {
         };
 
         fetchProfileData();
-    }, [session]);
+    }, []);
     
     if ( session ) {
         return (
             <main>
             <Header />
             <div className="flex flex-col text-center">
-                <h1 className="text-4xl mt-8">Welcome to ASL Learner!</h1>
-                <h2 className="text-2xl mt-8">You are logged in as {session.user.email}</h2>
+                <h1 className="text-4xl mt-8">ASL-EVO Account</h1>
+                <h2 className="text-xl mt-4 mb-8">You are logged in as <span className="font-bold">{session.user.name}</span></h2>
+            
+
+                { profileData &&
+                    <>
+                        <p>Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
+                        { profileData.streak > 2 &&
+                            <p>Your current streak: <span className="font-bold">{ profileData.streak } 🔥</span></p>
+                        }
+                        <Picture src={profileData.evolution} />
+                    </>
+                }
+
+                <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-40" onClick={() => signOut()}>Sign Out</button>
             </div>
-
-            { profileData &&
-                <>
-                    <p>{ profileData.points }</p>
-                    <p>{ profileData.streak }</p>
-                    <img src={profileData.evolution} />
-                </>
-            }
-
-            <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-60" onClick={() => signOut()}>Sign Out</button>
             </main>
         )
     }
@@ -45,11 +49,11 @@ export default function Profile() {
         <main>
         <Header />
         <div className="flex flex-col text-center">
-            <h1 className="text-4xl mt-8">Welcome to ASL Learner!</h1>
+            <h1 className="text-4xl mt-8">Welcome to ASL-EVO!</h1>
             <h2 className="text-2xl mt-8">You are not logged in.</h2>
-        </div>
 
-        <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-60" onClick={() => signIn()}>Sign In</button>
+            <button className="m-auto mt-8 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-40" onClick={() => signIn()}>Sign In</button>
+        </div>
         </main>
     );
 }
