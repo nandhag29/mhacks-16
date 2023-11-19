@@ -61,8 +61,8 @@ export default function Profile() {
                             :
                             <p className="text-xl">Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                         }
-                        <div className="overflow-hidden m-auto" style={{justifyContent: 'center' }}>
-                            <div style={{justifyContent: 'center' }}>Progress towards next evolution:</div>
+                        <div className="overflow-hidden m-auto justify-center">
+                            <div className="justify-center text-xl">Progress towards next evolution:</div>
                             <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={37} />
                             <img width="400" height="400" style={biffStyle} src={getEvolution(profileData.points)} />
                         </div>
