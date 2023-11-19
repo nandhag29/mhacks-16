@@ -1,40 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img src="public/ASL_EVO_LOGO.png" alt="logo" width="400">
+<img src="public/boof.png" alt="biff" width="150"/>
 
-## Getting Started
+## Inspiration
+Approximately 1.5 billion people across the world suffer from partial hearing loss, with 70 million suffering from full deafness. An estimated 700 million people will suffer from disabling hearing loss by 2050. Alongside these staggering hearling loss statistics, we were inspired by the idea of making sign language learning more fun and accessible for everyone. We wanted to create an app that could help people with hearing loss and deafness communicate better with others, and also raise awareness and appreciation of sign language among the general public. We also wanted to use gamification and personalization to motivate and engage users in the learning process.
 
-First, run the development server:
+## What it does
+ASL EVO is a game that helps a person learn sign language while evolving their own little friend, Biff! Users have their own accounts, and start by learning the ASL alphabet and eventually progressing to basic phrases. For each question they answer correctly, they gain a point towards Biff's evolution. If a user answers enough questions correct in a row, they get a streak which doubles the points they get per question! Points and streaks are also tracked on a global leaderboard so users can engage in friendly competition with each other. Once a user gains enough points, Biff evolves into Buuf and finally Boof!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How we built it
+TypeScript and Next.js for the fullstack application (frontend pages and api routes)
+MongoDB for storing a user's current points and streak.
+Prisma as our ORM for interacting with MongoDB.
+Tailwind for UI.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Challenges we ran into
+Getting the database interaction working was difficult, as our queries kept timing out on the MLive wifi. There were all kinds of issues with network access, database access, etc. Image resizing in css was also quite difficult.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Accomplishments that we're proud of
+Biff, Buuf, and Boof are all original characters that we created and drew during the hackathon! We also created the animations that play when each of them evolve!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## What we learned
+We learned a lot about fullstack development, git, and Typescript.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## What's next for ASL EVO
+We see many different paths for growth. The main place we can grow is in our ASL offerings by adding more topics, questions, and content and expanding our learning options. We also want to expand our character offerings to more characters beyond Biff and his evolutions, and allow players to be able to customize their characters to create a more personal and engaging game. Our next idea for a character is a fiery owl (name hasn't been decided yet).
