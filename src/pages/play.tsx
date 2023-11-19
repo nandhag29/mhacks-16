@@ -70,6 +70,15 @@ export default function Play() {
             }
         } else {
             setFeedback("wrong, try again!");
+            setText("");
+            if (session && session.user && session.user.email) {
+                fetch('/api/incorrect', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: session.user.email,
+                    }),
+                });
+            }
         }
     }
 
