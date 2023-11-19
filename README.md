@@ -2,7 +2,7 @@
 <img src="public/boof.png" alt="biff" width="250"/>
 
 built by Jonas, Nandha, Will, and Hamil \
-all drawings done by Hamil!
+all drawings done by Hamil! \
 If you'd like to play check out [aslevo.tech](https://www.aslevo.tech/)!
 
 ## Inspiration
