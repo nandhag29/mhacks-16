@@ -15,7 +15,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col text-center justify-center">
-          <h1 className="font-bold text-4xl mt-2">Learn ASL and evolve characters!</h1>
+          <h1 className="font-bold text-4xl mt-2">Learn ASL, evolve characters,<br />and compete with others!</h1>
           <Link className="text-xl mt-8 mb-4 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-black font-bold py-2 px-6 rounded-md w-64" href="/profile">Sign Up</Link>
           <Link className="text-xl mt-0 bg-emerald-700 text-white border border-emerald-700 font-bold py-2 px-6 rounded-lg w-64" href="/play">Play Now!</Link>
         </div>
