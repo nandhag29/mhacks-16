@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import Header from "../components/header";
 import { useSession, signIn } from "next-auth/react";
-import Picture from '../components/Picture';
 import Leaderboard from "@/components/leaderboard";
 
 // TODO
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
-
 
 const IMAGES = [
     "Goodbye.png",
