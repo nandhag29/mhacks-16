@@ -2,7 +2,8 @@
 <img src="public/boof.png" alt="biff" width="250"/>
 
 built by Jonas, Nandha, Will, and Hamil \
-all drawings done by Hamil!
+all drawings done by Hamil! \
+If you'd like to play check out [aslevo.tech](https://www.aslevo.tech/)!
 
 ## Inspiration
 Approximately 1.5 billion people across the world suffer from partial hearing loss, with 70 million suffering from full deafness. An estimated 700 million people will suffer from disabling hearing loss by 2050. Alongside these staggering hearling loss statistics, we were inspired by the idea of making sign language learning more fun and accessible for everyone. We wanted to create an app that could help people with hearing loss and deafness communicate better with others, and also raise awareness and appreciation of sign language among the general public. We also wanted to use gamification and personalization to motivate and engage users in the learning process.
