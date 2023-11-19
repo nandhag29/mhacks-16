@@ -14,7 +14,7 @@ const LETTERS = ["A.png", "B.png", "C.png", "D.png", "E.png", "F.png", "G.png", 
                  "Y.png", "Z.png"];
 
 const IMAGES = [
-    "Goodbye.png",
+    "GoodBye.png",
     "Hello.png",
     "ILoveYou.png",
     "No.png",
