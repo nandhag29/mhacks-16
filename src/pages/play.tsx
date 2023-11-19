@@ -8,8 +8,6 @@ import Leaderboard from "@/components/leaderboard";
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
 
-const gifUrl1 = require('public/BUUFspark.gif').default;
-const gifUrl2 = require('public/BOOFspark.gif').default;
 
 const IMAGES = [
     "Goodbye.png",
