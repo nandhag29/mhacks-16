@@ -126,15 +126,13 @@ export default function Play() {
     }, [session]);
 
     function submitGuess() {
-        let copy = profileData;
-
         if (!text) return;
 
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
             setFeedbackStyle("text-emerald-400");
             setImageBorder("border-emerald-400");
             setFeedback("correct!");
-            setImage(generateRandom(copy.points));
+            setImage(generateRandom(profileData.points));
             setText("");
             setCorrect(false);
             deceptiveUpdate(true);
