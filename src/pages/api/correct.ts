@@ -18,10 +18,13 @@ export default async function handler (
         return;
     }
 
+    // Amount to change points by
+    const inc = user.streak >= 3 ? 2 : 1;
+
     await prisma.user.update({
         where: { email: email },
         data: {
-            points: user.points + 1,
+            points: user.points + inc,
             streak: user.streak + 1,
         },
     });

@@ -54,7 +54,7 @@ export default function Play() {
         if (!text) return;
 
         if (generateImageCorrect(image || "") === generateGuessCorrect(text)) {
-            setFeedback("correct! +1");
+            setFeedback("correct!");
             setImage(generateRandom);
             setText("");
             setCorrect(false);

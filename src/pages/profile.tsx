@@ -3,6 +3,16 @@ import { useEffect, useState } from "react";
 import Picture from "../components/Picture";
 import Header from "../components/header";
 
+function getEvolution(points: number) {
+    if (points < 20) {
+        return "Biff.png";
+    } else if (points < 40) {
+        return "Buuf.png";
+    } else {
+        return "Boof.png";
+    }
+}
+
 export default function Profile() {
     const { data: session } = useSession();
     const [profileData, setProfileData] = useState(null);
@@ -38,7 +48,7 @@ export default function Profile() {
                             :
                             <p>Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                         }
-                        <Picture src={profileData.evolution} />
+                        <Picture src={getEvolution(profileData.points)} />
                     </>
                 }
 
