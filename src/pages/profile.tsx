@@ -1,6 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
+import ProgressBar from "../components/progressbar";
 
 function getEvolution(points: number) {
     if (points < 20) {
@@ -12,12 +13,22 @@ function getEvolution(points: number) {
     }
 }
 
+function progress(points: number) {
+    if (points < 20) {
+        return (points / 20) * 100;
+    } else if (points < 40) {
+        return (points / 40) * 100;
+    } else {
+        return 100;
+    }
+}
+
 export default function Profile() {
     const { data: session } = useSession();
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState<any>(null);
 
     let biffStyle = {
-        transform: "scale(1.2)",
+        transform: "scale(1.0)",
     };
 
     useEffect(() => {
@@ -34,7 +45,7 @@ export default function Profile() {
         fetchProfileData();
     }, [session]);
     
-    if ( session ) {
+    if ( session && session.user ) {
         return (
             <main>
             <Header />
@@ -42,7 +53,7 @@ export default function Profile() {
                 <h1 className="text-2xl mt-8 mb-8">You are logged in as <span className="font-bold">{session.user.name}</span></h1>
             
 
-                { profileData &&
+                { profileData && "points" in profileData && "streak" in profileData &&
                     <>
                         <p className="text-xl">Your points: <span className="font-bold">{ profileData.points } ✅</span></p>
                         { profileData.streak > 2 ?
@@ -50,7 +61,9 @@ export default function Profile() {
                             :
                             <p className="text-xl">Your current streak: <span className="font-bold">{ profileData.streak } 😢</span></p>
                         }
-                        <div className="overflow-hidden m-auto">
+                        <div className="overflow-hidden m-auto" style={{justifyContent: 'center' }}>
+                            <div style={{justifyContent: 'center' }}>Progress towards next evolution:</div>
+                            <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={37} />
                             <img width="400" height="400" style={biffStyle} src={getEvolution(profileData.points)} />
                         </div>
                     </>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function Leaderboard() {
-    const [leaderboardData, setLeaderboardData] = useState(null);
+    const [leaderboardData, setLeaderboardData] = useState<any>(null);
 
     useEffect(() => {
         const fetchLeaderboardData = async () => {

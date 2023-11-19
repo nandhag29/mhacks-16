@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
 import { useSession, signIn } from "next-auth/react";
-import Picture from '../components/Picture';
 import Leaderboard from "@/components/leaderboard";
+import ProgressBar from "../components/progressbar";
 
 // TODO
 // Maybe remove images after they've been seen
 // Timers for feedback / showing correct
 
+const LETTERS = ["A.png", "B.png", "C.png", "D.png", "E.png", "F.png", "G.png", "H.png", 
+                 "I.png", "J.png", "K.png", "L.png", "M.png", "N.png", "O.png", "P.png", 
+                 "Q.png", "R.png", "S.png", "T.png", "U.png", "V.png", "W.png", "X.png", 
+                 "Y.png", "Z.png"];
 
 const IMAGES = [
     "Goodbye.png",
@@ -21,6 +25,8 @@ const IMAGES = [
     "YoureWelcome.png",
 ]
 
+const COMBINED = LETTERS.concat(IMAGES);
+
 function getEvolution(points: number) {
     if (points < 20) {
         return "Biff.png";
@@ -29,11 +35,26 @@ function getEvolution(points: number) {
     } else {
         return "Boof.png";
     }
-
 }
 
-function generateRandom(): string {
-    return IMAGES[Math.floor(Math.random() * 9)]
+function progress(points: number) {
+    if (points < 20) {
+        return (points / 20) * 100;
+    } else if (points < 40) {
+        return (points / 40) * 100;
+    } else {
+        return 100;
+    }
+}
+
+function generateRandom(points: number): string {
+    if (points < 20) {
+        return LETTERS[Math.floor(Math.random() * 26)]
+    } else if (points >= 20 && points < 40) {     
+        return IMAGES[Math.floor(Math.random() * 9)]
+    } else {
+        return COMBINED[Math.floor(Math.random() * 35)]
+    }
 }
 
 function generateImageCorrect(input: string): string {
@@ -51,14 +72,28 @@ export default function Play() {
     const [feedback, setFeedback] = useState<string | null>(null);
     const [feedbackStyle, setFeedbackStyle] = useState<string>("");
     const [correct, setCorrect] = useState<boolean>(false);
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState<any>(null);
 
     // Authentication
     const { data: session } = useSession()
 
     useEffect(() => {
-        setImage(generateRandom());
-    }, []);
+        const fetchProfileData = async () => {
+            if (!session || !session.user) {
+                return;
+            }
+            const res = await fetch("/api/get_profile?email=" + session.user.email);
+            const json = await res.json();
+            setProfileData(json);
+            return json;
+        };
+    
+        fetchProfileData().then(profileData => {
+            if (profileData) {
+                setImage(generateRandom(profileData.points));
+            } 
+        });
+    }, [session]);
 
     function deceptiveUpdate(correct: boolean) {
         if (!session) return
@@ -97,7 +132,7 @@ export default function Play() {
             setFeedbackStyle("text-emerald-400");
             setImageBorder("border-emerald-400");
             setFeedback("correct!");
-            setImage(generateRandom());
+            setImage(generateRandom(profileData.points));
             setText("");
             setCorrect(false);
             deceptiveUpdate(true);
@@ -206,6 +241,10 @@ export default function Play() {
                     <div className="overflow-hidden m-auto">
                         {profileData.points === 20 || (profileData.points === 21 && profileData.streak > 3) ? <img width="400" height="400" src={"BUUFspark.gif"} alt="BUUFspark.gif" /> :
                         profileData.points === 40 || (profileData.points === 41 && profileData.streak > 3) ? <img width="400" height="400" src={"BOOFspark.gif"} alt="BOOFspark.gif" /> : <img width="400" height="400" src={getEvolution(profileData.points)} alt="Evolution.gif" />}
+                    </div>
+                    <div className="overflow-hidden m-auto">
+                        <div style={{justifyContent: 'center' }}>Progress towards next evolution:</div>
+                        <ProgressBar bgcolor="#008080" completed={progress(profileData.points)} height={30} width="80%" margin={37} />
                     </div>
                 </>
                 :
