@@ -28,7 +28,10 @@ export default function Leaderboard() {
                 return (
                     <div key={i} className="flex">
                         <p className="w-10 font-bold">{i + 1}</p>
-                        <p className="w-48">{ user.name }</p>
+                        { i == 0 ? <p className="w-48">{ user.name } 👑</p> :
+                            <p className="w-48">{ user.name }</p>
+                        }
+                        
                         <p className="w-24"> { user.points }</p>
                         <p> { user.streak } 🔥</p>
                     </div>
